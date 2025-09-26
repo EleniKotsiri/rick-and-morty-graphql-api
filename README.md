@@ -111,7 +111,7 @@ npm run lint     # Run ESLint
 ### URL as state (deep-linking)
 
 * Server page (`src/app/page.tsx`) reads `searchParams` and preloads with the same variables to avoid hydration mismatch.
-* Client list mirrors state and URL with `router.replace`, rebuilding the query string to drop unknown keys.
+* Client list mirrors state to the URL with `router.replace`, rebuilding the query string to drop unknown keys.
 * Empty `name` and `page=1` are omitted for clean URLs.
 * Out-of-range pages: if `info.pages` is known and `page > pages`, snap to **page 1**. If `info` is missing but `page > 1` and there are no results, also clamp immediately.
 
