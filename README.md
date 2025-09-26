@@ -191,3 +191,22 @@ Each result is cached. Navigation between pages or back/forward reuses cached da
 * Pagination works with accessible controls.
 * Detail drawer fetches and displays extended data.
 * URL reflects `name`/`page` so refresh and deep-links are preserved.
+
+---
+
+## Screenshots 
+<img width="1919" height="970" alt="home-desktop-light" src="https://github.com/user-attachments/assets/dc63f1eb-e021-44fe-a02c-899909a0a087" />
+
+<img width="1916" height="969" alt="home-desktop-dark" src="https://github.com/user-attachments/assets/46b66a69-c7b4-49e6-83fa-dce82099efca" />
+
+<img width="1910" height="1007" alt="search-smith" src="https://github.com/user-attachments/assets/3c4498cd-b24e-4129-9c89-277f83f95bd4" />
+
+<img width="1904" height="1003" alt="search-rick-page4" src="https://github.com/user-attachments/assets/1bf2d21e-3263-4f61-a142-997c86451d31" />
+
+<img width="1919" height="1003" alt="detail-drawer" src="https://github.com/user-attachments/assets/9018d1a1-39b8-41d0-8838-b9754141c1f9" />
+
+<img width="808" height="779" alt="tablet-grid" src="https://github.com/user-attachments/assets/08a8e9d1-97eb-4e00-86aa-0574bb4449c6" />
+
+<img width="848" height="863" alt="mobile-screen-1" src="https://github.com/user-attachments/assets/55aa4508-065d-44a1-be7c-0b1dcf745b0d" />
+
+<img width="870" height="865" alt="mobile-screen-2" src="https://github.com/user-attachments/assets/155036b6-9578-4006-96e2-05464acbf736" />
