@@ -77,5 +77,6 @@ npm run dev
 │     └─ character-types.ts        # CharacterBasic / CharacterDetailType, query & variable types
 ├─ public/
 ├─ package.json
+├─ tailwind.config.ts              # Tailwind configuration global
 └─ README.md
 ```
