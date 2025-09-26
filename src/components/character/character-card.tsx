@@ -14,12 +14,12 @@ export default function CharacterCard({
     <Card
       isPressable
       onPress={onClick}
-      className="h-full min-w-[280px] w-full shadow-none flex flex-col bg-content-2 overflow-hidden rounded-xl transition-transform will-change-transform hover:scale-[1.01]"
+      className="h-full w-full min-w-[300px] sm:min-w-[280px] shadow-none flex flex-col bg-content-2 overflow-hidden rounded-xl transition-transform will-change-transform hover:scale-[1.01]"
       role="article"
       aria-label={char.name}
     >
       <CardBody className="p-4 flex flex-col space-y-2">
-        <h3 className="text-lg font-semibold leading-tight">{char.name}</h3>
+        <h3 className="text-lg font-semibold leading-tight break-words">{char.name}</h3>
 
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
           <StatusDot status={char.status} />

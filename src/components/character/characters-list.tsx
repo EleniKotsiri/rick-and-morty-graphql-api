@@ -145,7 +145,7 @@ function CharactersResults({
 
       <ul
         role="list"
-        className="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))] auto-rows-fr xl:gap-6"
+        className="grid gap-3 grid-cols-1 sm:[grid-template-columns:repeat(auto-fit,minmax(280px,1fr))] auto-rows-fr xl:gap-6"
       >
         {results.map((char) => (
           <li key={char!.id} className="h-full min-w-0 mx-auto sm:mx-0">
