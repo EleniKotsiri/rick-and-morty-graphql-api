@@ -3,8 +3,31 @@ import { GET_CHARACTERS } from "@/graphql/queries/characters-list.query";
 import { CharactersQueryVars } from "@/types/character-types";
 import CharactersList from "@/components/character/characters-list";
 
-export default async function Home() {
-  const variables: CharactersQueryVars = { page: 1, name: "" };
+type PageProps = {
+  [key: string]: string | string[] | undefined;
+};
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: Promise<PageProps>;
+}) {
+  const searchPars = (await searchParams) ?? {};
+  const nameParam = Array.isArray(searchPars.name)
+    ? searchPars.name[0]
+    : searchPars.name;
+  const pageParam = Array.isArray(searchPars.page)
+    ? searchPars.page[0]
+    : searchPars.page;
+
+  const initialName = typeof nameParam === "string" ? nameParam : "";
+  const parsed = Number.parseInt(String(pageParam ?? "1"), 10);
+  const initialPage = Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+
+  const variables: CharactersQueryVars = {
+    page: initialPage,
+    name: initialName || undefined,
+  };
 
   return (
     <>
@@ -24,7 +47,7 @@ export default async function Home() {
         aria-labelledby="main-content"
       >
         <PreloadQuery query={GET_CHARACTERS} variables={variables}>
-          <CharactersList initialPage={1} initialName="" />
+          <CharactersList initialPage={initialPage} initialName={initialName} />
         </PreloadQuery>
       </section>
     </>

@@ -21,7 +21,7 @@ export default function RootLayout({
         <ApolloWrapper>
           <Providers>
             <Header />
-            <main className="flex-1 mx-auto py-4 md:py-8 space-y-6">
+            <main className="flex-1 mx-auto py-4 ">
               {children}
             </main>
             <Footer />

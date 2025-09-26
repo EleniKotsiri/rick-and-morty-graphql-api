@@ -6,8 +6,8 @@ export default function Footer() {
   return (
     <>
       <Divider />
-      <footer className="container px-3 sm:px-5 w-full mx-auto mt-auto bg-background">
-        <div className="text-center sm:text-start">
+      <footer className="container w-full mx-auto mt-auto bg-background">
+        <div className="text-center px-3 sm:px-5 sm:text-start">
           <div className="py-5 text-sm text-muted-foreground">
             Copyright © {currentYear} Eleni Kotsiri
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { Pagination } from "@heroui/react";
-import { Suspense, useState, useMemo, useEffect } from "react";
+import { Suspense, useState, useMemo, useEffect, useRef } from "react";
 import { GET_CHARACTERS } from "@/graphql/queries/characters-list.query";
 import {
   CharacterBasic,
@@ -14,6 +14,7 @@ import CharacterDetail from "./character-detail";
 import { useDebounce } from "@/hooks/use-debounce";
 import SearchBar from "../ui/search-input";
 import SkeletonGrid from "../ui/skeleton-grid";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function CharactersList({
   initialPage = 1,
@@ -25,11 +26,41 @@ export default function CharactersList({
   const [page, setPage] = useState(initialPage);
   const [name, setName] = useState(initialName);
   const [selected, setSelected] = useState<CharacterBasic | null>(null);
-  const debouncedName = useDebounce(name, 400);
+  const debouncedName = useDebounce(name, 450);
 
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  // Reset page when the user uses search input
+  const didMount = useRef(false);
   useEffect(() => {
+    if (!didMount.current) {
+      didMount.current = true;
+      return;
+    }
     setPage(1);
-  }, [debouncedName]);
+  }, [name]);
+
+  // Sync state
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    const trimmed = name.trim();
+    if (trimmed) params.set("name", trimmed);
+    else params.delete("name");
+
+    if (page > 1) params.set("page", String(page));
+    else params.delete("page");
+
+    const next = params.toString();
+    const curr = searchParams.toString();
+    if (next !== curr) {
+      router.replace(next ? `${pathname}?${next}` : pathname, {
+        scroll: false,
+      });
+    }
+  }, [name, page, pathname, router, searchParams]);
 
   return (
     <section className="space-y-4" aria-labelledby="characters-list">
@@ -92,10 +123,16 @@ function CharactersResults({
   const info = data?.characters?.info;
   const results = data?.characters?.results ?? [];
 
+  // clamp page if it doesn't exist
+  useEffect(() => {
+    const total = info?.pages ?? 1;
+    if (page > total) onSetPage(total);
+  }, [info?.pages, page, onSetPage]);
+
   if (!results.length) {
     return (
       <div className="rounded border border-content-3 bg-content-2 p-4">
-        {name ? <>No results for “{name}”.</> : <>No character found.</>}
+        {name ? <>No results for "{name}".</> : <>No character found.</>}
       </div>
     );
   }
@@ -123,7 +160,10 @@ function CharactersResults({
         onChange={onSetPage}
         showControls
         isCompact
-        className="flex cursor-pointer justify-center mt-2 sm:mt-6"
+        className="flex justify-center mt-2 sm:mt-6"
+        classNames={{
+          item: "cursor-pointer",
+        }}
       />
     </>
   );

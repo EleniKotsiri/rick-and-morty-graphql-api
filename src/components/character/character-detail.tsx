@@ -86,7 +86,7 @@ export default function CharacterDetail({
       hideCloseButton
       size="md"
     >
-      <DrawerContent className="bg-content-2 h-[85dvh] mt-3 sm:h-[100dvh] sm:mt-0">
+      <DrawerContent className="bg-content-2 h-[85dvh] mt-3 p-2 sm:p-4 sm:h-[100dvh] sm:mt-0">
         {(close) => (
           <>
             <DrawerHeader className="px-4 py-3 border-b border-border/50">
@@ -103,7 +103,7 @@ export default function CharacterDetail({
               ) : null}
 
               <div className="pt-2">
-                <Button variant="ghost" onPress={close} className="w-full">
+                <Button variant="ghost" onPress={close} className="w-full p-2 sm:p-4" aria-label="Close details">
                   Close
                 </Button>
               </div>
