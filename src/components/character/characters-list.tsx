@@ -44,11 +44,11 @@ export default function CharactersList({
 
   // Sync state
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
 
     const trimmed = name.trim();
     if (trimmed) params.set("name", trimmed);
-    else params.delete("name");
+    if (page > 1) params.set("page", String(page));
 
     if (page > 1) params.set("page", String(page));
     else params.delete("page");
@@ -125,8 +125,8 @@ function CharactersResults({
 
   // clamp page if it doesn't exist
   useEffect(() => {
-    const total = info?.pages ?? 1;
-    if (page > total) onSetPage(total);
+    const total = info?.pages;
+    if (typeof total === "number" && page > total) onSetPage(1);
   }, [info?.pages, page, onSetPage]);
 
   if (!results.length) {
